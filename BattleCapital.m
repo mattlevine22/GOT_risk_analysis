@@ -1,3 +1,6 @@
+my_dir = '/Users/matthewlevine/code_projects/GOT_risk_analysis/';
+addpath(genpath(my_dir));
+
 di_range = [1 6];
 def_vec = 1:40;
 attack_vec = 1:40;
@@ -42,21 +45,23 @@ for k=1:length(def_vec)
     end
 end
 
-%%
 attack_ratio = Z(:);
 attack_success_rate = Y(:);
-% mnrfit(attack_ratio,double(attack_success_rate))
 
-figure;plot(attack_ratio,attack_success_rate,'o')
+%%
+fig1=figure;
+plot(attack_ratio,attack_success_rate,'o')
 xlabel('Number of Attackers : Number of Defenders')
 ylabel('Probability of Attack Succeeding')
 title('Likelihood of winning an attack on a capital')
 xlim([0 5])
 set(gca,'LineWidth',1.25)
 set(gca,'FontSize',14)
+savefig(fig1,sprintf('%s/Probability_of_Successful_Capital_Attack1.fig',my_dir))
+print(fig1,sprintf('%s/Probability_of_Successful_Capital_Attack1.png',my_dir),'-dpng','-r300')
 
 %%
-figure;
+fig2 = figure;
 plot(attack_ratio(rel_left_attacking>0),rel_left_attacking(rel_left_attacking>0),'o');hold on;
 ylabel('Fraction of Attackers Left')
 
@@ -68,13 +73,8 @@ title('Expected number of pieces left over after an attack')
 xlim([0 10])
 set(gca,'LineWidth',1.25)
 set(gca,'FontSize',14)
-
-
-
-% histogram(X(X>0))
-% xlabel('Number of Attackers Left')
-% ylabel('Frequency')
-% title(sprintf('Attacker win (%.2f %%)',100*sum(X>0)/length(X)))
+savefig(fig2,sprintf('%s/Expected_leftover_pieces1.fig',my_dir))
+print(fig2,sprintf('%s/Expected_leftover_pieces1.png',my_dir),'-dpng','-r300')
 
 %% FUNCTIONS
 function foo_diff = FinalDiff(num_attack,num_defense,di_range)

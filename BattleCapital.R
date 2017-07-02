@@ -1,7 +1,8 @@
 # choose your settings
+setwd('/Users/matthewlevine/code_projects/GOT_risk_analysis/')
 di_range <- 1:6 # faces of the die
-def_vec <- 1:15 # vector of number of defenders to be used in simulations
-attack_vec <- 1:15 # vector of number of attackers to be used in simulations
+def_vec <- 1:5 # vector of number of defenders to be used in simulations
+attack_vec <- 1:5 # vector of number of attackers to be used in simulations
 num_its <- 10000 # number of simulations to run for each N-defenders vs N-attackers situation.
 
 Y <- matrix(0,length(def_vec),length(attack_vec))
@@ -64,7 +65,7 @@ dfb <- data.frame(attack_ratio = attack_ratio[rel_left_defending<0],
 df <- rbind(dfa,dfb)
 
 png('Expected_leftover_pieces.png')
-p <- ggplot(df, aes(attack_ratio,fraction_pieces_left , colour = type))
+p <- ggplot(df, aes(attack_ratio,fraction_pieces_left, colour = type))
 p + geom_point() + 
   ylab('Fraction of pieces left') + 
   xlab('Number of Attackers : Number of Defenders') + 
