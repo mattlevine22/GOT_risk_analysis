@@ -14,6 +14,7 @@ boo = 1:length(def_vec);
 
 all_sims = zeros(length(def_vec),length(attack_vec),num_its);
 
+parpool(12);
 parfor k=boo
     k_foo = [];
     left_foo = [];
