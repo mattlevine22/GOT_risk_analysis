@@ -1,5 +1,5 @@
 % my_dir = '/Users/matthewlevine/code_projects/GOT_risk_analysis/';
-my_dir = './';
+my_dir = '.';
 addpath(genpath(my_dir));
 
 di_range = [1 6];
@@ -28,6 +28,7 @@ parfor k=boo
             num_attack = attack_vec(j);
             goo(c) = FinalDiff(num_attack,num_defense,di_range);
         end
+        all_attacks(j,:) = goo;
         k_foo(j) = sum(goo>0)/num_its;
         left_foo(j) = mean(goo);
         rel_left_attacking(j) = mean(goo)/num_attack;
