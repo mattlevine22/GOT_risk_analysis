@@ -42,6 +42,23 @@ end
 save('all_sim1.mat')
 
 %%
+mean_res = mean(all_sims,3);
+% rows 1-40 are 1-40 defenders
+% cols 1-40 are 1-40 attackers
+[X,Y] = meshgrid(def_vec,attack_vec);
+fig0 = figure;
+surf(X,Y,mean_res)
+foo_tmp = max(max(def_vec),max(attack_vec));
+caxis([-foo_tmp foo_tmp]);
+colorbar;
+view(2)
+xlabel('Number of Attackers')
+ylabel('Number of Defenders')
+title(sprintf('Expected number of remaining attackers in the average capital battle.\nRemember, this does not tell you about the variance in outcomes.'))
+savefig(fig0,sprintf('%s/Mean_Leftover_Attackers_GRID.fig',my_dir))
+print(fig0,sprintf('%s/Mean_Leftover_Attackers_GRID.png',my_dir),'-dpng','-r300')
+
+%%
 Z = [];
 rel_left_attacking = [];
 rel_left_defending = [];
